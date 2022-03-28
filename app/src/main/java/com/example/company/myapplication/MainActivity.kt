@@ -1,16 +1,10 @@
 package com.example.company.myapplication
 
-import android.Manifest
-import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Environment
-import android.support.v4.app.ActivityCompat
-import android.support.v4.content.ContextCompat
-import android.widget.ArrayAdapter
-import kotlinx.android.synthetic.main.activity_main.*
+import android.support.v7.app.AppCompatActivity
+import android.view.View
+import android.widget.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,8 +12,16 @@ class MainActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val dataArray = MutableList(5) { x -> "Item$x" }
-        var adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, dataArray)
+        val dataArray = MutableList(5) { x -> "${x+1}" }
+        val adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, dataArray)
+        val listView = findViewById<ListView>(R.id.listView1)
+        listView.adapter = adapter
+        listView.setOnItemClickListener { _: AdapterView<*>, view1: View, _: Int, _: Long ->
+            val intent = Intent(this, ListItemActivity::class.java)
+            intent.putExtra("text", (view1 as TextView).text.toString())
+            startActivity(intent)
+        }
+
 
     }
 }

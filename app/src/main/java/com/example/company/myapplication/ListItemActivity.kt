@@ -9,6 +9,6 @@ class ListItemActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_item)
-
+        textView.text = intent.getStringExtra("text")
     }
 }
